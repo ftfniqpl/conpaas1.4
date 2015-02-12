@@ -1,0 +1,5 @@
+#!/bin/bash
+if [ -f /root/bcast_client/context.sh ]; then
+  . /root/bcast_client/context.sh
+fi
+

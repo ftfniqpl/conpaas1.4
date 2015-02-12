@@ -1,0 +1,59 @@
+[conpaas]
+# Path to ConPaaS conf dir
+CONF_DIR = /etc/cpsdirector
+
+# Path to certificates
+CERT_DIR = /etc/cpsdirector/certs
+
+# Unique name of the current ConPaaS deployment
+DEPLOYMENT_NAME = conpaas
+
+# Support for external identity providers
+support_external_idp = false
+
+
+[iaas]
+
+DRIVER = openstack
+IDENTITY_URL = http://$OPENSTACK_IP:5000/v2.0
+IDENTITY_ADMIN_URL = http://$OPENSTACK_IP:35357/v2.0
+COMPUTE_URL = http://$OPENSTACK_IP:8774/v2
+IMAGE_URL = http://$OPENSTACK_IP:9292/v2
+
+USER =  $OPENSTACK_USER
+PASSWORD = $OPENSTACK_PASSWORD
+TENANT = $OPENSTACK_TENANT
+
+ADMIN_USER = $OPENSTACK_USER
+ADMIN_PASSWORD = $OPENSTACK_PASSWORD
+ADMIN_TENANT = $OPENSTACK_TENANT
+
+IMAGE_ID = $OPENSTACK_IMAGEID
+FLAVOR = $OPENSTACK_FLAVORID
+
+CV_URL = http://$OPENSTACK_IP:8085/server
+MEMCACHED = $OPENSTACK_IP:11211
+
+PORT = 8999
+CLOUDNAME = openstack
+
+TIMEUNIT = 60
+COSTUNIT = 1
+SAMPLING_WORKERS = 1
+MAXNODES = 20
+SPEEDFACTOR = 1
+
+# specify COST_PER_TIME as currency amount / ATU (in seconds)
+# so            $ 6.00 / 3600  is 6 dollar per hour             (or part thereof)
+# and           $ 1.00 / 600   is 1 dollar per 10 minutes       (or part thereof)
+COST_PER_TIME = $ 0.00/36000
+MAX_VMS = 9
+
+[director]
+DEBUG = true
+DATABASE_URI = sqlite:////etc/cpsdirector/director.db
+USERDATA_DIR = /etc/cpsdirector/data
+# This is where ConPaaS.tar.gz is expected to be found, as well as the
+# decrement credit callback. conpaas-director provides both functionalities:
+# put the public IP address of the machine running the director here.
+DIRECTOR_URL = https://$HOSTIP:5555

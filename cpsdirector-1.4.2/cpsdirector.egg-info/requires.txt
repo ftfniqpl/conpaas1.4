@@ -1,0 +1,5 @@
+cpslib
+flask-sqlalchemy
+apache-libcloud
+netaddr
+flask-openid
